@@ -1,22 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 
-function Search() {
+function Search({ onSearchSubmit}) {
+  const [searchInput, setSearchInput] = useState("")
+  
+  function handleChange(e) {
+    setSearchInput(e.target.value)
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
-    console.log("submitted");
+    onSearchSubmit(searchInput)
   }
 
   return (
-    <form className="searchbar" onSubmit={handleSubmit}>
-      <input
-        type="text"
-        id="search"
-        placeholder="search free stuff"
-        value={""}
-        onChange={(e) => console.log(e.target.value)}
-      />
-      <button type="submit">🔍</button>
-    </form>
+    <>
+      <form className="searchbar" onSubmit={handleSubmit}>
+        <input
+          type="text"
+          id="search"
+          placeholder="search free stuff"
+          value={searchInput}
+          onChange={handleChange}
+        />
+        <button type="submit">🔍</button>
+      </form>
+    </>
   );
 }
 
